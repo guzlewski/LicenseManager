@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Licenses Management</h1>
+</div>
+
+<ejs-grid id="Grid" allowFiltering="true" actionFailure="actionFailure" allowPaging="true" allowSorting="true" allowMultiSorting="true" allowGrouping="true" toolbar="@(new List<string>() {"Add", "Edit", "Delete", "Update", "Cancel", "Search" })">
+    <e-data-manager url="/License/UrlDataSource" updateUrl="/License/Update" removeUrl="/License/Delete" adaptor="UrlAdaptor" />
+    <e-grid-editSettings allowAdding="false" allowDeleting="true" allowEditing="true" showDeleteConfirmDialog="true" mode="Normal" newRowPosition="Bottom" />
+    <e-grid-pagesettings pageSizes="true" />
+    <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+
+    <e-grid-columns>
+        <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" allowEditing="false" width="60" />
+        <e-grid-column field="Key" headerText="Key" validationRules="@(new { required=true })" width="300" />
+        <e-grid-column field="Hwid" headerText="Hwid" />
+        <e-grid-column field="Active" headerText="Active" editType="booleanedit" displayAsCheckBox="true" width="100" />
+        <e-grid-column field="Product" headerText="Product" allowEditing="false" />
+        <e-grid-column field="User" headerText="Owner" allowEditing="false" />
+        <e-grid-column field="CreationDate" headerText="Creation Date" allowEditing="false" customFormat="@(new { type = "dateTime", format = "dd/MM/yy HH:mm:ss" })" />
+    </e-grid-columns>
+</ejs-grid>
+
+<div>
+    <a asp-action="Add">Generate Licenses</a>
+</div>

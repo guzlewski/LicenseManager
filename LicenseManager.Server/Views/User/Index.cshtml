@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Users Management</h1>
+</div>
+
+<ejs-grid id="Grid" allowFiltering="true" actionFailure="actionFailure" allowPaging="true" allowSorting="true" allowMultiSorting="true" allowGrouping="true" toolbar="@(new List<string>() {"Add", "Edit", "Delete", "Update", "Cancel", "Search" })">
+    <e-data-manager url="/User/UrlDataSource" updateUrl="/User/Update" removeUrl="/User/Delete" adaptor="UrlAdaptor"/>
+    <e-grid-editSettings allowAdding="false" allowDeleting="true" allowEditing="true" showDeleteConfirmDialog="true" mode="Normal"/>
+    <e-grid-pagesettings pageSizes="true" />
+    <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+
+    <e-grid-columns>
+        <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" isIdentity="true"/>
+        <e-grid-column field="UserName" headerText="Username" validationRules="@(new { required=true })"/>
+        <e-grid-column field="Email" headerText="Email" validationRules="@(new { required=true })"/>        
+        <e-grid-column field="LockoutEnd" headerText="Lockout End" editType="datetimepickeredit" customFormat="@(new { type = "dateTime", format = "dd/MM/yy HH:mm:ss" })"/>
+        <e-grid-column field="Keys" headerText="Owned Keys" allowEditing="false" />
+        <e-grid-column field="RegisterDate" headerText="Register Date" allowEditing="false" customFormat="@(new { type = "dateTime", format = "dd/MM/yy HH:mm:ss" })"/>
+    </e-grid-columns>
+</ejs-grid>

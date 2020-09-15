@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">My Keys</h1>
+</div>
+
+<ejs-grid id="Grid" allowFiltering="true" actionFailure="actionFailure" allowPaging="true" allowSorting="true" allowMultiSorting="true" allowGrouping="true" toolbar="@(new List<string>() {"Add", "Edit", "Delete", "Update", "Cancel", "Search" })">
+    <e-data-manager url="/Home/UrlDataSource" insertUrl="/Home/Insert" updateUrl="/Home/Update" adaptor="UrlAdaptor" />
+    <e-grid-editSettings allowAdding="true" allowDeleting="false" allowEditing="true" showConfirmDialog="true" mode="Normal" newRowPosition="Bottom" />
+    <e-grid-pagesettings pageSizes="true" />
+    <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+
+    <e-grid-columns>
+        <e-grid-column field="Key" headerText="Key" validationRules="@(new { required=true })" width="300" isPrimaryKey="true" allowEditing="false"/>
+        <e-grid-column field="Hwid" headerText="Hwid"/>
+        <e-grid-column field="Active" headerText="Active" allowEditing="false" displayAsCheckBox="true" width="100" />
+        <e-grid-column field="Product" headerText="Product" allowEditing="false" />
+        <e-grid-column field="RedeemDate" headerText="Redeem Date" allowEditing="false" customFormat="@(new { type = "dateTime", format = "dd/MM/yy HH:mm:ss" })" />
+    </e-grid-columns>
+</ejs-grid>

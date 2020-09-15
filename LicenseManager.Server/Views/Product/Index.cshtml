@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Products Management</h1>
+</div>
+
+<ejs-grid id="Grid" allowFiltering="true" actionFailure="actionFailure" allowPaging="true" allowSorting="true" allowMultiSorting="true" allowGrouping="true" toolbar="@(new List<string>() {"Add", "Edit", "Delete", "Update", "Cancel", "Search" })">
+    <e-data-manager url="/Product/UrlDataSource" insertUrl="/Product/Insert" updateUrl="/Product/Update" removeUrl="/Product/Delete" adaptor="UrlAdaptor" />
+    <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" showDeleteConfirmDialog="true" mode="Normal" newRowPosition="Bottom" />
+    <e-grid-pagesettings pageSizes="true" />
+    <e-grid-filterSettings type="Menu"></e-grid-filterSettings>
+    <e-grid-columns>
+        <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" isIdentity="true" />
+        <e-grid-column field="Name" headerText="Name" validationRules="@(new { required=true })" />
+        <e-grid-column field="Description" headerText="Description" />
+        <e-grid-column field="Suspended" headerText="Suspended" editType="booleanedit" displayAsCheckBox="true" />
+        <e-grid-column field="Keys" headerText="Generated Keys" isIdentity="true" />
+        <e-grid-column field="CreationDate" headerText="Creation Date" isIdentity="true" customFormat="@(new { type = "dateTime", format = "dd/MM/yy HH:mm:ss" })" />
+    </e-grid-columns>
+</ejs-grid>
